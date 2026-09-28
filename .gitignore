@@ -1,0 +1,27 @@
+# Environnement virtuel
+.venv/
+venv/
+env/
+
+# Secrets
+.env
+
+# Données brutes (lourdes, regénérables)
+data/raw/
+data/processed/
+
+# Cache Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Notebooks — checkpoints
+.ipynb_checkpoints/
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
