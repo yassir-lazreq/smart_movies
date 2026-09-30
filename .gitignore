@@ -6,9 +6,8 @@ env/
 # Secrets
 .env
 
-# Données brutes (lourdes, regénérables)
-data/raw/
-data/processed/
+# Données (lourdes, regénérables)
+data/
 
 # Cache Python
 __pycache__/
