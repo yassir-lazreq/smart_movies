@@ -36,3 +36,5 @@ DATA_PROCESSED = DATA_DIR / "processed"
 # Création idempotente des dossiers
 DATA_RAW.mkdir(parents=True, exist_ok=True)
 DATA_PROCESSED.mkdir(parents=True, exist_ok=True)
+DATA_ENRICHED = DATA_DIR / "enriched"
+DATA_ENRICHED.mkdir(parents=True, exist_ok=True)
