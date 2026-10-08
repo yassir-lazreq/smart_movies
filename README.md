@@ -20,10 +20,8 @@ python -m venv .venv
 pip install -r requirements.txt
 
 # 3. Configure API key
-# Create .env at project root:
-# TMDB_API_KEY=your_tmdb_v3_key
-# TMDB_BASE_URL=https://api.themoviedb.org/3
-# TMDB_LANGUAGE=fr-FR
+cp .env.example .env
+# Edit .env with your TMDB API key
 
 # 4. Start MongoDB (Docker)
 docker run -d --name mongodb -p 27017:27017 mongo:latest
@@ -33,16 +31,32 @@ docker run -d --name mongodb -p 27017:27017 mongo:latest
 
 ```bash
 # 1. Extract: fetch ~2000 movies from TMDB → data/raw/
-python -m src.extract
+python -m src.etl.extract
 
 # 2. Transform: clean & normalize → data/processed/*.parquet
-python -m src.transform
+python -m src.etl.transform
 
 # 3. Enrich: features, outliers, search_text → data/enriched/*.parquet
-python -m src.features
+python -m src.etl.features
 
 # 4. Load: insert into MongoDB + run queries
-python -m src.load_mongo
+python -m src.etl.load_mongo
+```
+
+## ML Models
+
+```bash
+# TF-IDF Recommender
+python -m src.recommendation.tfidf_recommender
+
+# High Engagement Classification (Étape 6)
+python -m src.models.engagement
+
+# Genre Classification
+python -m src.models.genre
+
+# Revenue Tier Classification
+python -m src.models.revenue_tier
 ```
 
 ## Output
@@ -82,13 +96,21 @@ python -m src.load_mongo
 ```
 ├── config.py              # Central config, paths, env
 ├── requirements.txt
-├── .env                   # TMDB_API_KEY (not committed)
+├── .env.example           # Template for environment variables
 ├── src/
-│   ├── tmdb_client.py     # HTTP client for TMDB
-│   ├── extract.py         # API → raw JSON
-│   ├── transform.py       # JSON → normalized Parquet
-│   ├── features.py        # Silver → Gold enrichment
-│   └── load_mongo.py      # Parquet → MongoDB + queries
+│   ├── etl/               # Data ingestion and tabular transformations
+│   │   ├── tmdb_client.py # HTTP client for TMDB
+│   │   ├── extract.py     # API → raw JSON
+│   │   ├── transform.py   # JSON → normalized Parquet
+│   │   ├── features.py    # Silver → Gold enrichment
+│   │   └── load_mongo.py  # Parquet → MongoDB + queries
+│   ├── recommendation/
+│   │   └── tfidf_recommender.py
+│   └── models/
+│       ├── common.py      # Shared utilities
+│       ├── engagement.py  # High engagement classification
+│       ├── genre.py       # Genre classification
+│       └── revenue_tier.py # Revenue tier classification
 └── data/                  # Ignored (generated)
     ├── raw/
     ├── processed/
