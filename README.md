@@ -46,9 +46,6 @@ python -m src.etl.load_mongo
 ## ML Models
 
 ```bash
-# TF-IDF Recommender
-python -m src.recommendation.tfidf_recommender
-
 # High Engagement Classification (Étape 6)
 python -m src.models.engagement
 
@@ -104,8 +101,6 @@ python -m src.models.revenue_tier
 │   │   ├── transform.py   # JSON → normalized Parquet
 │   │   ├── features.py    # Silver → Gold enrichment
 │   │   └── load_mongo.py  # Parquet → MongoDB + queries
-│   ├── recommendation/
-│   │   └── tfidf_recommender.py
 │   └── models/
 │       ├── common.py      # Shared utilities
 │       ├── engagement.py  # High engagement classification
