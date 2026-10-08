@@ -73,6 +73,11 @@ python -m src.models.revenue_tier
 4. Top 5 production companies (`$unwind` + `$group` + `$sort` + `$limit`)
 5. High ROI movies (ROI > 5) (`$match` + `$project` + `$sort` + `$limit`)
 
+## Jira Planning
+
+Project planning and task tracking are available on the
+[Jira planning board](https://yassirlazre.atlassian.net/jira/software/projects/KAN/boards/1?filter=&groupBy=none&atlOrigin=eyJpIjoiMjhlZmZhNWU1ZTJlNGFlZTgyYjdhZWQ3NzFjZWM2YzciLCJwIjoiaiJ9).
+
 ## Key Features (Gold Layer)
 
 - Outlier capping (IQR) on budget, revenue, runtime, popularity, vote_average, vote_count
